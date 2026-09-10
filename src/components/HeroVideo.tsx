@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const CLOUDINARY_MP4 =
   "https://res.cloudinary.com/jobsway/video/upload/v1788892806/vcl_icrnm8.mp4";
@@ -8,35 +8,267 @@ const CLOUDINARY_MP4 =
 const CLOUDINARY_POSTER =
   "https://res.cloudinary.com/jobsway/video/upload/so_1/v1788892806/vcl_icrnm8.jpg";
 
-const PLAYBACK_RATE = 2;
+const SPEEDS = [1, 1.5, 2] as const;
+
+function fmt(t: number) {
+  if (!Number.isFinite(t) || t < 0) t = 0;
+  const m = Math.floor(t / 60);
+  const s = Math.floor(t % 60);
+  return `${m}:${s.toString().padStart(2, "0")}`;
+}
+
+function PlayIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
+      <path d="M8 5.14v13.72c0 .78.85 1.26 1.52.86l11.03-6.86a1 1 0 0 0 0-1.72L9.52 4.28A1 1 0 0 0 8 5.14Z" />
+    </svg>
+  );
+}
+
+function PauseIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
+      <path d="M7 5h3v14H7zM14 5h3v14h-3z" />
+    </svg>
+  );
+}
+
+function VolumeIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
+      <path d="M4 9v6h4l5 5V4L8 9H4Zm12.5 3a4.5 4.5 0 0 0-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12Zm-2.5-8v2.06A7 7 0 0 1 14 19.94V22a9 9 0 0 0 0-18Z" />
+    </svg>
+  );
+}
+
+function MuteIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
+      <path d="M4 9v6h4l5 5V4L8 9H4Zm15.6 3 2.1-2.1-1.4-1.4-2.1 2.1-2.1-2.1-1.4 1.4 2.1 2.1-2.1 2.1 1.4 1.4 2.1-2.1 2.1 2.1 1.4-1.4-2.1-2.1Z" />
+    </svg>
+  );
+}
+
+function ExpandIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3" />
+    </svg>
+  );
+}
+
+function CompressIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M8 3v3a2 2 0 0 1-2 2H3M16 3v3a2 2 0 0 0 2 2h3M8 21v-3a2 2 0 0 0-2-2H3M16 21v-3a2 2 0 0 1 2-2h3" />
+    </svg>
+  );
+}
 
 export default function HeroVideo() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [started, setStarted] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const [current, setCurrent] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [speedIdx, setSpeedIdx] = useState(0); // 1x by default
+  const [muted, setMuted] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
-  // Keep the rate pinned at 2x (browsers can reset it on load/play).
-  const applyRate = () => {
-    const v = videoRef.current;
-    if (v) v.playbackRate = PLAYBACK_RATE;
-  };
+  const speed = SPEEDS[speedIdx];
 
-  // Set on mount too — metadata may load before React attaches the handlers.
+  // Keep playbackRate pinned to the chosen speed (browsers can reset it).
   useEffect(() => {
-    applyRate();
+    const v = videoRef.current;
+    if (v) v.playbackRate = speed;
+  }, [speed, started]);
+
+  // Metadata (and thus duration) can load before React attaches its handlers,
+  // so read it directly on mount if it's already available.
+  useEffect(() => {
+    const v = videoRef.current;
+    if (v && Number.isFinite(v.duration) && v.duration > 0) {
+      setDuration(v.duration);
+    }
   }, []);
 
+  const togglePlay = useCallback(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) {
+      setStarted(true);
+      void v.play();
+    } else {
+      v.pause();
+    }
+  }, []);
+
+  const cycleSpeed = useCallback(() => {
+    setSpeedIdx((i) => (i + 1) % SPEEDS.length);
+  }, []);
+
+  const onSeek = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const v = videoRef.current;
+    if (!v || !Number.isFinite(v.duration)) return;
+    v.currentTime = (Number(e.target.value) / 100) * v.duration;
+  }, []);
+
+  const toggleMute = useCallback(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = !v.muted;
+    setMuted(v.muted);
+  }, []);
+
+  // Keep fullscreen state in sync with the browser (Esc, gestures, etc.).
+  useEffect(() => {
+    const onFsChange = () => setIsFullscreen(Boolean(document.fullscreenElement));
+    document.addEventListener("fullscreenchange", onFsChange);
+    return () => document.removeEventListener("fullscreenchange", onFsChange);
+  }, []);
+
+  const toggleFullscreen = useCallback(() => {
+    const el = containerRef.current;
+    const v = videoRef.current;
+    if (document.fullscreenElement) {
+      void document.exitFullscreen();
+    } else if (el?.requestFullscreen) {
+      void el.requestFullscreen();
+    } else if (
+      // iOS Safari: only the <video> can go fullscreen (native player).
+      v &&
+      "webkitEnterFullscreen" in v
+    ) {
+      (v as HTMLVideoElement & { webkitEnterFullscreen: () => void }).webkitEnterFullscreen();
+    }
+  }, []);
+
+  const progress = duration > 0 ? (current / duration) * 100 : 0;
+
   return (
-    <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-neutral-300 bg-neutral-900">
+    <div
+      ref={containerRef}
+      className="group relative h-full w-full overflow-hidden rounded-xl bg-neutral-900"
+    >
       <video
         ref={videoRef}
         className="h-full w-full object-cover"
         src={CLOUDINARY_MP4}
         poster={CLOUDINARY_POSTER}
-        controls
         playsInline
         preload="metadata"
-        onLoadedMetadata={applyRate}
-        onPlay={applyRate}
+        onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
+        onDurationChange={(e) => setDuration(e.currentTarget.duration)}
+        onTimeUpdate={(e) => setCurrent(e.currentTarget.currentTime)}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        onClick={togglePlay}
       />
+
+      {/* Thumbnail overlay with big play button — before first play */}
+      {!started && (
+        <button
+          type="button"
+          onClick={togglePlay}
+          aria-label="Play video"
+          className="absolute inset-0 flex items-center justify-center bg-black/25 transition hover:bg-black/15"
+        >
+          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/95 shadow-lg ring-1 ring-black/5 transition group-hover:scale-105 sm:h-[4.5rem] sm:w-[4.5rem]">
+            <svg
+              viewBox="0 0 24 24"
+              className="h-7 w-7 text-rose sm:h-8 sm:w-8"
+              fill="currentColor"
+              aria-hidden
+            >
+              {/* Triangle centered in the viewBox with a small optical nudge */}
+              <path d="M6.45 5.6v12.8c0 .78.85 1.26 1.52.86l10.3-6.4a1 1 0 0 0 0-1.72L7.97 4.74a1 1 0 0 0-1.52.86Z" />
+            </svg>
+          </span>
+          {/* Duration badge so they can see it's short */}
+          {duration > 0 && (
+            <span className="absolute bottom-3 right-3 rounded-md bg-black/70 px-2 py-1 text-xs font-semibold text-white">
+              {fmt(duration)}
+            </span>
+          )}
+        </button>
+      )}
+
+      {/* Custom control bar — always visible once started */}
+      {started && (
+        <div className="absolute inset-x-0 bottom-0 flex items-center gap-2 bg-gradient-to-t from-black/80 via-black/45 to-transparent px-2.5 pb-3 pt-8 text-white sm:gap-3 sm:px-3">
+          <button
+            type="button"
+            onClick={togglePlay}
+            aria-label={playing ? "Pause" : "Play"}
+            className="shrink-0 transition hover:text-rosewood"
+          >
+            {playing ? (
+              <PauseIcon className="h-6 w-6" />
+            ) : (
+              <PlayIcon className="h-6 w-6" />
+            )}
+          </button>
+
+          {/* Time — current / total, so length is always clear */}
+          <span className="shrink-0 text-xs font-medium tabular-nums text-white/90">
+            {fmt(current)} / {fmt(duration)}
+          </span>
+
+          {/* Progress / seek */}
+          <input
+            type="range"
+            min={0}
+            max={100}
+            step={0.1}
+            value={progress}
+            onChange={onSeek}
+            aria-label="Seek"
+            className="h-1 flex-1 cursor-pointer appearance-none rounded-full bg-white/30 accent-rose"
+            style={{
+              background: `linear-gradient(to right, var(--color-rosewood, #c47b96) ${progress}%, rgba(255,255,255,0.3) ${progress}%)`,
+            }}
+          />
+
+          {/* Speed — one tap, always on screen */}
+          <button
+            type="button"
+            onClick={cycleSpeed}
+            aria-label={`Playback speed ${speed}x`}
+            className="shrink-0 rounded-md bg-white/20 px-2 py-1 text-xs font-bold tabular-nums transition hover:bg-white/30"
+          >
+            {speed}x
+          </button>
+
+          {/* Mute / unmute */}
+          <button
+            type="button"
+            onClick={toggleMute}
+            aria-label={muted ? "Unmute" : "Mute"}
+            className="shrink-0 transition hover:text-rosewood"
+          >
+            {muted ? (
+              <MuteIcon className="h-[22px] w-[22px]" />
+            ) : (
+              <VolumeIcon className="h-[22px] w-[22px]" />
+            )}
+          </button>
+
+          {/* Fullscreen / exit fullscreen */}
+          <button
+            type="button"
+            onClick={toggleFullscreen}
+            aria-label={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
+            className="shrink-0 transition hover:text-rosewood"
+          >
+            {isFullscreen ? (
+              <CompressIcon className="h-5 w-5" />
+            ) : (
+              <ExpandIcon className="h-5 w-5" />
+            )}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
