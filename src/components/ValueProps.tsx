@@ -57,7 +57,7 @@ const VALUE_PROPS: ValueProp[] = [
     cta: "See the Zawj Experience",
     media: {
       kind: "image",
-      src: "/couple-sitting-kaaba.png",
+      src: "/couple-sitting-kaaba.jpg",
       alt: "A couple sitting together before the Kaaba in Makkah, her head resting on his shoulder",
       objectPosition: "center 38%",
       blend: true,
@@ -115,7 +115,7 @@ const VALUE_PROPS: ValueProp[] = [
     cta: "Explore the Journey",
     media: {
       kind: "image",
-      src: "/couple-window-makkah.png",
+      src: "/couple-window-makkah.jpg",
       alt: "A couple in ihram looking out an airplane window at Makkah, the Kaaba and Clock Tower below",
       objectPosition: "center 40%",
       blend: true,
