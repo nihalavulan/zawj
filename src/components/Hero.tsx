@@ -163,7 +163,7 @@ export default function Hero() {
               src="/couple-kaaba.jpg"
               alt="A couple standing together before the Kaaba in Makkah"
               fill
-              priority
+              loading="eager"
               sizes="100vw"
               className="object-cover object-[center_32%]"
             />
