@@ -1,6 +1,6 @@
 import Image from "next/image";
-
 import { WHATSAPP_URL } from "@/lib/whatsapp";
+import { dict, type Lang } from "@/lib/i18n";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -18,7 +18,8 @@ function PhoneIcon({ className }: { className?: string }) {
   );
 }
 
-export default function Footer() {
+export default function Footer({ lang }: { lang: Lang }) {
+  const t = dict[lang].footer;
   return (
     <footer className="bg-ink text-white">
       <div className="mx-auto max-w-7xl px-6 py-14 lg:px-10 lg:py-16">
@@ -33,16 +34,14 @@ export default function Footer() {
               className="h-9 w-auto"
             />
             <p className="mt-5 text-sm leading-relaxed text-white/60">
-              A thoughtfully curated Umrah for couples — more privacy, personal
-              space, and meaningful time together, guided by 15+ years of trusted
-              experience.
+              {t.tagline}
             </p>
           </div>
 
           {/* Contact */}
           <div>
             <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-rosewood">
-              Get in touch
+              {t.getInTouch}
             </p>
             <div className="mt-4 flex flex-col gap-3">
               <a
@@ -52,7 +51,7 @@ export default function Footer() {
                 className="inline-flex items-center gap-2.5 text-[0.95rem] font-medium text-white/85 transition hover:text-white"
               >
                 <WhatsAppIcon className="h-4 w-4 text-rosewood" />
-                Chat on WhatsApp
+                {t.chat}
               </a>
               <a
                 href="tel:+919400971338"
@@ -67,8 +66,8 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
-          <span>© {new Date().getFullYear()} Zawj. All rights reserved.</span>
-          <span>A couples-only Umrah experience.</span>
+          <span>© {new Date().getFullYear()} Zawj. {t.rights}</span>
+          <span>{t.note}</span>
         </div>
       </div>
     </footer>

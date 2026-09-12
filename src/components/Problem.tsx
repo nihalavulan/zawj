@@ -1,7 +1,9 @@
 import HeroVideo from "./HeroVideo";
 import Reveal from "./Reveal";
+import { dict, type Lang } from "@/lib/i18n";
 
-export default function Problem() {
+export default function Problem({ lang }: { lang: Lang }) {
+  const t = dict[lang].problem;
   return (
     <section id="story" className="relative overflow-hidden bg-[#fffaf9] py-20 scroll-mt-8 sm:py-24 lg:py-28">
       {/* Soft warm background wash to echo the hero */}
@@ -16,25 +18,18 @@ export default function Problem() {
         <div className="flex flex-col">
           <span className="inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-rose sm:text-xs">
             <span className="h-px w-6 bg-rose/50" />
-            The problem
+            {t.eyebrow}
           </span>
 
           <h2
             className="mt-4 text-[1.9rem] leading-[1.12] tracking-[-0.01em] text-ink sm:mt-5 sm:text-[2.5rem] sm:leading-[1.08] lg:text-[3rem]"
             style={{ fontFamily: "var(--font-serif)", fontWeight: 500 }}
           >
-            The Umrah market gives couples two choices: join the{" "}
-            <em className="italic text-rose">crowd</em> or pay a{" "}
-            <em className="italic text-rose">premium</em> to escape it.
+            {t.title}
           </h2>
 
           <p className="mt-5 max-w-md text-[0.95rem] leading-relaxed text-muted sm:mt-6 sm:text-base">
-            Join a traditional package and you&rsquo;re sharing spaces, following
-            a group itinerary, and experiencing Umrah the same way everyone else
-            does. Want something more private and personal?{" "}
-            <span className="font-semibold text-ink">
-              A custom package for just two can quickly become far more expensive.
-            </span>
+            {t.body}
           </p>
         </div>
 
@@ -47,7 +42,7 @@ export default function Problem() {
               className="text-[0.95rem] text-rose sm:text-[1.15rem]"
               style={{ fontFamily: "var(--font-serif)", fontStyle: "italic" }}
             >
-              Press play
+              {t.pressPlay}
             </span>
             <svg
               viewBox="0 0 56 64"

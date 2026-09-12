@@ -1,8 +1,7 @@
-import type { ReactNode } from "react";
 import Image from "next/image";
 import Reveal from "./Reveal";
-
 import { WHATSAPP_URL } from "@/lib/whatsapp";
+import { dict, type Lang } from "@/lib/i18n";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -20,162 +19,60 @@ function CheckIcon({ className }: { className?: string }) {
   );
 }
 
-type Point = string | { title: string; desc: string };
+type ImageMedia = { src: string; alt: string; objectPosition?: string };
 
-type Media =
-  | {
-      kind: "image";
-      src: string;
-      alt: string;
-      objectPosition?: string;
-      blend?: boolean;
-    }
-  | { kind: "placeholder"; note: ReactNode };
-
-type ValueProp = {
-  eyebrow: string;
-  headline: ReactNode;
-  points: Point[];
-  cta: string;
-  media: Media;
-};
-
-const VALUE_PROPS: ValueProp[] = [
+// Language-independent — the photos are the same in both languages.
+const MEDIA: ImageMedia[] = [
   {
-    eyebrow: "Designed for two",
-    headline: (
-      <>
-        An Umrah Designed for <em className="italic text-rose">Two</em>, Not
-        Forty.
-      </>
-    ),
-    points: [
-      "Private rooms for every couple",
-      "A 40-seat bus for just 12 couples",
-      "A couples-only group",
-      "Sessions and experiences created specifically for couples",
-    ],
-    cta: "See the Zawj Experience",
-    media: {
-      kind: "image",
-      src: "/couple-sitting-kaaba.jpg",
-      alt: "A couple sitting together before the Kaaba in Makkah, her head resting on his shoulder",
-      objectPosition: "center 38%",
-      blend: true,
-    },
+    src: "/couple-sitting-kaaba.jpg",
+    alt: "A couple sitting together before the Kaaba in Makkah, her head resting on his shoulder",
+    objectPosition: "center 38%",
   },
   {
-    eyebrow: "Smart value",
-    headline: (
-      <>
-        The Experience of a <em className="italic text-rose">Custom Umrah</em>,
-        Without the Custom Trip Price.
-      </>
-    ),
-    points: [
-      "A couples-first experience with the efficiencies of a group",
-      "Private rooms without paying for a fully private trip",
-      "A thoughtfully planned itinerary without the cost of building one from scratch",
-      "More personal than a group package, more accessible than a custom trip",
-    ],
-    cta: "See What's Included",
-    media: {
-      kind: "image",
-      src: "/couple-touching-kaaba.jpg",
-      alt: "A couple reaching out to touch the Kaaba's kiswah together in Makkah",
-      objectPosition: "center 45%",
-      blend: true,
-    },
+    src: "/couple-touching-kaaba.jpg",
+    alt: "A couple reaching out to touch the Kaaba's kiswah together in Makkah",
+    objectPosition: "center 45%",
   },
   {
-    eyebrow: "Growing together",
-    headline: (
-      <>
-        An Umrah That Helps You Build the{" "}
-        <em className="italic text-rose">Life You&rsquo;re Praying For.</em>
-      </>
-    ),
-    points: [
-      {
-        title: "Marriage in Islam",
-        desc: "Understand marriage, communication, responsibilities, and growing together through an Islamic perspective.",
-      },
-      {
-        title: "Family Circle",
-        desc: "Navigate marriage, parents, children, parenthood, and building your own family.",
-      },
-      {
-        title: "Work and Life Balance",
-        desc: "Learn how to protect your marriage and family while navigating careers, ambition, technology, and modern life.",
-      },
-      {
-        title: "Couples Workshop",
-        desc: "A practical session to turn these conversations into things you can take home and implement together.",
-      },
-    ],
-    cta: "Explore the Journey",
-    media: {
-      kind: "image",
-      src: "/couple-window-makkah.jpg",
-      alt: "A couple in ihram looking out an airplane window at Makkah, the Kaaba and Clock Tower below",
-      objectPosition: "center 40%",
-      blend: true,
-    },
+    src: "/couple-window-makkah.jpg",
+    alt: "A couple in ihram looking out an airplane window at Makkah, the Kaaba and Clock Tower below",
+    objectPosition: "center 40%",
   },
 ];
 
-function ImagePlaceholder({ note }: { note: ReactNode }) {
+function Media({ media }: { media: ImageMedia }) {
   return (
-    <div className="flex aspect-[4/3] w-full items-center justify-center rounded-xl border-2 border-dashed border-rosewood/40 bg-mist/50 p-8">
-      <p className="max-w-xs text-center text-sm leading-relaxed text-muted">
-        <span className="mb-1 block text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-rosewood">
-          Image / video
-        </span>
-        {note}
-      </p>
+    <div className="rounded-[1.4rem] bg-mist/70 p-2 shadow-lg shadow-ink/5 ring-1 ring-line">
+      <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl sm:aspect-[4/4.5]">
+        <Image
+          src={media.src}
+          alt={media.alt}
+          fill
+          sizes="(min-width: 1024px) 40vw, 100vw"
+          className="object-cover"
+          style={{ objectPosition: media.objectPosition ?? "center" }}
+        />
+      </div>
     </div>
   );
 }
 
-function Media({ media }: { media: Media }) {
-  if (media.kind === "image") {
-    // Rounded, matted photo — a soft theme-tinted frame to match the
-    // rest of the page's rounded cards.
-    return (
-      <div className="rounded-[1.4rem] bg-mist/70 p-2 shadow-lg shadow-ink/5 ring-1 ring-line">
-        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl sm:aspect-[4/4.5]">
-          <Image
-            src={media.src}
-            alt={media.alt}
-            fill
-            sizes="(min-width: 1024px) 40vw, 100vw"
-            className="object-cover"
-            style={{ objectPosition: media.objectPosition ?? "center" }}
-          />
-        </div>
-      </div>
-    );
-  }
-  return <ImagePlaceholder note={media.note} />;
-}
-
-export default function ValueProps() {
+export default function ValueProps({ lang }: { lang: Lang }) {
+  const items = dict[lang].value;
   return (
     <section className="relative bg-white py-20 sm:py-24 lg:py-28">
       <div className="mx-auto flex max-w-7xl flex-col gap-24 px-6 lg:gap-32 lg:px-10">
-        {VALUE_PROPS.map((vp, i) => {
+        {items.map((vp, i) => {
           const imageLeft = i % 2 === 0;
           return (
             <Reveal
-              key={vp.eyebrow}
+              key={i}
               className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
             >
-              {/* Image / video / graph */}
               <div className={imageLeft ? "lg:order-1" : "lg:order-2"}>
-                <Media media={vp.media} />
+                <Media media={MEDIA[i]} />
               </div>
 
-              {/* Copy */}
               <div className={imageLeft ? "lg:order-2" : "lg:order-1"}>
                 <span className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-rose sm:text-xs">
                   {vp.eyebrow}

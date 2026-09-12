@@ -2,29 +2,7 @@
 
 import { useState } from "react";
 import Reveal from "./Reveal";
-
-const FAQS: { q: string; a: string }[] = [
-  {
-    q: "Who is the Zawj Umrah for?",
-    a: "Zawj is designed exclusively for married couples who want to experience Umrah together — with more privacy, personal space, and meaningful time as a couple, rather than in a large mixed group.",
-  },
-  {
-    q: "When is the journey?",
-    a: "Our next couples' Umrah departs in October. Speak with our team and we'll share the exact dates, the full itinerary, and everything that's included before you decide.",
-  },
-  {
-    q: "What's included in the package?",
-    a: "Everything is arranged for you — your stay, transportation, a thoughtfully curated itinerary, and couples-focused sessions and experiences. You simply focus on your ibadah and your time together.",
-  },
-  {
-    q: "How private is it, really?",
-    a: "Every couple gets their own private room, the group is capped at just 12 couples on a 40-seat bus, and it's couples-only throughout — so you get the closeness of a private trip with the ease and value of a group.",
-  },
-  {
-    q: "How do I reserve a spot?",
-    a: "Just tell us you're interested. Our team will reach out, walk you through all the details, and guide you through securing your couple's spot from start to finish.",
-  },
-];
+import { dict, type Lang } from "@/lib/i18n";
 
 function ChevronIcon({ className }: { className?: string }) {
   return (
@@ -34,7 +12,8 @@ function ChevronIcon({ className }: { className?: string }) {
   );
 }
 
-export default function FAQ() {
+export default function FAQ({ lang }: { lang: Lang }) {
+  const t = dict[lang].faq;
   const [open, setOpen] = useState<number | null>(0);
 
   return (
@@ -43,22 +22,22 @@ export default function FAQ() {
         {/* Heading */}
         <div className="text-center">
           <span className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-rose sm:text-xs">
-            FAQ
+            {t.eyebrow}
           </span>
           <h2
             className="mt-3 text-[1.9rem] leading-[1.12] tracking-[-0.01em] text-ink sm:text-[2.4rem] sm:leading-[1.08]"
             style={{ fontFamily: "var(--font-serif)", fontWeight: 500 }}
           >
-            Questions couples ask us
+            {t.title}
           </h2>
         </div>
 
         {/* Accordion */}
         <div className="mt-10 divide-y divide-line overflow-hidden rounded-2xl border border-line bg-white shadow-lg shadow-ink/5">
-          {FAQS.map((item, i) => {
+          {t.items.map((item, i) => {
             const isOpen = open === i;
             return (
-              <div key={item.q}>
+              <div key={i}>
                 <button
                   type="button"
                   onClick={() => setOpen(isOpen ? null : i)}

@@ -1,10 +1,7 @@
 "use client";
 
 import Reveal from "./Reveal";
-
-const SHARE_TITLE = "Zawj — A Couple's Umrah";
-const SHARE_TEXT =
-  "I found something for us 🕋❤️ — an Umrah made just for couples, to experience together. Should we? Take a look:";
+import { dict, type Lang } from "@/lib/i18n";
 
 function HeartIcon({ className }: { className?: string }) {
   return (
@@ -14,19 +11,21 @@ function HeartIcon({ className }: { className?: string }) {
   );
 }
 
-export default function ShareWithPartner() {
+export default function ShareWithPartner({ lang }: { lang: Lang }) {
+  const t = dict[lang].share;
+
   const onShare = async () => {
     const url = typeof window !== "undefined" ? window.location.href : "";
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
-        await navigator.share({ title: SHARE_TITLE, text: SHARE_TEXT, url });
+        await navigator.share({ title: t.shareTitle, text: t.shareText, url });
         return;
       } catch {
         // user cancelled or share failed — fall through to WhatsApp
       }
     }
     window.open(
-      `https://wa.me/?text=${encodeURIComponent(`${SHARE_TEXT} ${url}`)}`,
+      `https://wa.me/?text=${encodeURIComponent(`${t.shareText} ${url}`)}`,
       "_blank",
       "noopener,noreferrer"
     );
@@ -47,18 +46,16 @@ export default function ShareWithPartner() {
           />
 
           <span className="relative text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white/70">
-            Better together
+            {t.eyebrow}
           </span>
           <h2
             className="relative mt-3 text-[1.8rem] leading-[1.12] sm:text-[2.2rem]"
             style={{ fontFamily: "var(--font-serif)", fontWeight: 500 }}
           >
-            Some journeys are best{" "}
-            <em className="italic text-blush">decided together.</em>
+            {t.title}
           </h2>
           <p className="relative mx-auto mt-4 max-w-md text-sm leading-relaxed text-white/85 sm:text-base">
-            Send this to your other half and start the conversation — your Umrah,
-            together, begins with a single tap.
+            {t.body}
           </p>
 
           <button
@@ -67,7 +64,7 @@ export default function ShareWithPartner() {
             className="relative mt-7 inline-flex items-center gap-2.5 rounded-lg bg-white px-6 py-3 text-[0.95rem] font-semibold text-rose shadow-lg shadow-black/10 transition hover:-translate-y-0.5 hover:bg-mist"
           >
             <HeartIcon className="h-[18px] w-[18px]" />
-            Share with my partner
+            {t.button}
           </button>
         </div>
       </Reveal>

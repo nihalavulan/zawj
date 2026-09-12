@@ -1,6 +1,6 @@
 import Reveal from "./Reveal";
-
 import { WHATSAPP_URL } from "@/lib/whatsapp";
+import { dict, type Lang } from "@/lib/i18n";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -26,19 +26,8 @@ function PhoneIcon({ className }: { className?: string }) {
   );
 }
 
-const RECAP = [
-  "Private rooms and a couples-only group of just 12",
-  "Custom-trip closeness, without the custom-trip price",
-  "Sessions that nurture your marriage, not just your itinerary",
-];
-
-const REASSURANCE = [
-  "15+ years of trusted experience",
-  "Dedicated couple support",
-  "Just a conversation, no obligation",
-];
-
-export default function FinalCTA() {
+export default function FinalCTA({ lang }: { lang: Lang }) {
+  const t = dict[lang].finalCta;
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-mist/70 to-white py-20 sm:py-24 lg:py-28">
       {/* Soft warm wash */}
@@ -52,29 +41,23 @@ export default function FinalCTA() {
         {/* Copy */}
         <div>
           <span className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-rose sm:text-xs">
-            Only 12 couples · This October
+            {t.eyebrow}
           </span>
 
           <h2
             className="mt-3 text-[2rem] leading-[1.1] tracking-[-0.01em] text-ink sm:text-[2.6rem] sm:leading-[1.06]"
             style={{ fontFamily: "var(--font-serif)", fontWeight: 500 }}
           >
-            This October, only{" "}
-            <em className="italic text-rose">12 couples</em> will make this
-            journey together.
+            {t.title}
           </h2>
 
           <p className="mt-5 max-w-md text-[0.95rem] leading-relaxed text-muted sm:text-base">
-            Once the spots are filled, they&rsquo;re gone. If you and your partner
-            want an Umrah with real privacy, space, and meaning,{" "}
-            <span className="font-semibold text-ink">
-              this is the moment to reach out.
-            </span>
+            {t.body}
           </p>
 
           {/* Recap of the value props */}
           <ul className="mt-6 flex flex-col gap-3">
-            {RECAP.map((item) => (
+            {t.recap.map((item) => (
               <li key={item} className="flex items-start gap-3">
                 <CheckIcon className="mt-0.5 h-5 w-5 shrink-0 text-rose" />
                 <span className="text-[0.95rem] leading-relaxed text-ink sm:text-base">
@@ -91,11 +74,10 @@ export default function FinalCTA() {
             className="text-[1.4rem] leading-tight text-ink sm:text-[1.6rem]"
             style={{ fontFamily: "var(--font-serif)", fontWeight: 500 }}
           >
-            Reserve your couple&rsquo;s spot
+            {t.panelTitle}
           </h3>
           <p className="mt-2 text-[0.92rem] leading-relaxed text-muted sm:text-[0.95rem]">
-            Tell us you&rsquo;re interested and our team takes it from there — no
-            pressure, just a conversation.
+            {t.panelBody}
           </p>
 
           {/* Primary CTA */}
@@ -106,7 +88,7 @@ export default function FinalCTA() {
             className="mt-6 inline-flex w-full items-center justify-center gap-2.5 rounded-lg bg-rose px-6 py-3.5 text-[0.98rem] font-semibold text-white shadow-md shadow-rose/25 transition hover:bg-rose-dark"
           >
             <WhatsAppIcon className="h-[18px] w-[18px]" />
-            Talk to us on WhatsApp
+            {t.cta}
           </a>
 
           {/* Secondary — call */}
@@ -118,9 +100,9 @@ export default function FinalCTA() {
             +91 9400 971 338
           </a>
 
-          {/* Reassurance — reduce fear, uncertainty, doubt */}
+          {/* Reassurance */}
           <ul className="mt-6 flex flex-col gap-2.5 border-t border-line pt-6">
-            {REASSURANCE.map((item) => (
+            {t.reassurance.map((item) => (
               <li
                 key={item}
                 className="flex items-center gap-2 text-[0.85rem] font-medium text-muted"

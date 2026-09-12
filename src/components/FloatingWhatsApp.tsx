@@ -1,4 +1,5 @@
 import { WHATSAPP_URL } from "@/lib/whatsapp";
+import { dict, type Lang } from "@/lib/i18n";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -8,13 +9,14 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
-export default function FloatingWhatsApp() {
+export default function FloatingWhatsApp({ lang }: { lang: Lang }) {
+  const t = dict[lang].floating;
   return (
     <a
       href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat with us on WhatsApp"
+      aria-label={t.aria}
       className="group fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-lg shadow-black/20 transition hover:scale-105 hover:shadow-xl sm:bottom-6 sm:right-6 sm:h-[3.75rem] sm:w-[3.75rem]"
       style={{ marginBottom: "env(safe-area-inset-bottom)" }}
     >
@@ -28,7 +30,7 @@ export default function FloatingWhatsApp() {
 
       {/* Label appears on hover (desktop) */}
       <span className="pointer-events-none absolute right-full mr-3 hidden whitespace-nowrap rounded-lg bg-ink px-3 py-1.5 text-sm font-medium text-white opacity-0 shadow-md transition group-hover:opacity-100 sm:block">
-        Chat with us
+        {t.label}
       </span>
     </a>
   );

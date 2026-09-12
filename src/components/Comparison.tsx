@@ -1,29 +1,21 @@
 import Reveal from "./Reveal";
+import { dict, type Lang } from "@/lib/i18n";
 
-const ROWS: { label: string; normal: string; zawj: string }[] = [
-  { label: "Group size", normal: "40+ pilgrims", zawj: "12 couples" },
-  { label: "Your room", normal: "Shared spaces", zawj: "Private room" },
-  { label: "Your group", normal: "Mixed crowd", zawj: "Couples only" },
-  { label: "Itinerary", normal: "One-size-fits-all", zawj: "Curated for couples" },
-  { label: "Time together", normal: "Rushed & crowded", zawj: "Space to connect" },
-  { label: "Couples sessions", normal: "Not included", zawj: "Included" },
-];
-
-export default function Comparison() {
+export default function Comparison({ lang }: { lang: Lang }) {
+  const t = dict[lang].comparison;
   return (
     <section className="relative bg-[#fffaf9] py-20 sm:py-24 lg:py-28">
       <Reveal className="mx-auto max-w-2xl px-6">
         {/* Heading */}
         <div className="text-center">
           <span className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-rose sm:text-xs">
-            The difference
+            {t.eyebrow}
           </span>
           <h2
             className="mt-3 text-[1.9rem] leading-[1.1] tracking-[-0.01em] text-ink sm:text-[2.4rem]"
             style={{ fontFamily: "var(--font-serif)", fontWeight: 500 }}
           >
-            A normal package vs.{" "}
-            <em className="italic text-rose">Zawj</em>
+            {t.title}
           </h2>
         </div>
 
@@ -38,19 +30,19 @@ export default function Comparison() {
           <div className="relative grid grid-cols-2">
             {/* Header */}
             <div className="border-b border-line px-3 py-3.5 text-center text-sm font-bold text-muted sm:text-base">
-              Normal package
+              {t.colNormal}
             </div>
             <div className="border-b border-rose bg-rose px-3 py-3.5 text-center text-sm font-bold text-white sm:text-base">
               <span style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontWeight: 600 }}>
-                Zawj
+                {t.colZawj}
               </span>
             </div>
 
             {/* Rows — attribute band, then the two values */}
-            {ROWS.map((row, ri) => {
-              const last = ri === ROWS.length - 1;
+            {t.rows.map((row, ri) => {
+              const last = ri === t.rows.length - 1;
               return (
-                <div key={row.label} className="contents">
+                <div key={ri} className="contents">
                   <div className="col-span-2 border-b border-line py-1.5 text-center text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-muted">
                     {row.label}
                   </div>
@@ -75,7 +67,7 @@ export default function Comparison() {
         </div>
 
         <p className="mt-4 text-center text-xs text-muted sm:text-sm">
-          Everything a couple actually wants from Umrah — without the crowd.
+          {t.caption}
         </p>
       </Reveal>
     </section>

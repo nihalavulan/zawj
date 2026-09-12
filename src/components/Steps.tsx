@@ -1,6 +1,6 @@
 import Reveal from "./Reveal";
-
 import { WHATSAPP_URL } from "@/lib/whatsapp";
+import { dict, type Lang } from "@/lib/i18n";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -10,40 +10,21 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
-const STEPS: { title: string; desc: string }[] = [
-  {
-    title: "Tell Us You're Interested",
-    desc: "Share a few details about you and your partner, and our team will get in touch to understand your plans and answer your questions.",
-  },
-  {
-    title: "Speak With Our Zawj Team",
-    desc: "We'll walk you through the October journey, what's included, the experience, and everything you need to know before you decide.",
-  },
-  {
-    title: "Reserve Your Couple's Spot",
-    desc: "Once you're ready, secure your place in the journey and complete the booking process with our team guiding you throughout.",
-  },
-  {
-    title: "We Take Care of the Journey",
-    desc: "From your stay and transportation to the experiences and sessions, everything is arranged so you can focus on your ibadah and enjoy the journey together.",
-  },
-];
-
-export default function Steps() {
+export default function Steps({ lang }: { lang: Lang }) {
+  const t = dict[lang].steps;
   return (
     <section className="relative bg-white py-20 sm:py-24 lg:py-28">
       <Reveal className="mx-auto max-w-6xl px-6 lg:px-10">
         {/* Heading */}
         <div className="mx-auto max-w-2xl text-center">
           <span className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-rose sm:text-xs">
-            How it works
+            {t.eyebrow}
           </span>
           <h2
             className="mt-3 text-[1.9rem] leading-[1.12] tracking-[-0.01em] text-ink sm:text-[2.4rem] sm:leading-[1.08]"
             style={{ fontFamily: "var(--font-serif)", fontWeight: 500 }}
           >
-            Experience the Umrah you&rsquo;ve always wanted in{" "}
-            <em className="italic text-rose">4 simple steps</em>
+            {t.title}
           </h2>
         </div>
 
@@ -54,11 +35,11 @@ export default function Steps() {
             aria-hidden
             className="absolute left-[12.5%] right-[12.5%] top-[1.375rem] hidden h-px bg-line lg:block"
           />
-          {STEPS.map((step, i) => {
-            const notLast = i < STEPS.length - 1;
+          {t.items.map((step, i) => {
+            const notLast = i < t.items.length - 1;
             return (
               <li
-                key={step.title}
+                key={i}
                 className="relative flex gap-5 lg:flex-col lg:items-center lg:gap-5 lg:text-center"
               >
                 {/* Mobile vertical connector */}
@@ -102,7 +83,7 @@ export default function Steps() {
             className="inline-flex w-full items-center justify-center gap-2.5 rounded-lg bg-rose px-6 py-3 text-[0.95rem] font-semibold text-white shadow-md shadow-rose/25 transition hover:bg-rose-dark sm:w-auto"
           >
             <WhatsAppIcon className="h-[18px] w-[18px]" />
-            Start with step one
+            {t.cta}
           </a>
         </div>
       </Reveal>

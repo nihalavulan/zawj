@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { WHATSAPP_URL } from "@/lib/whatsapp";
+import { dict, type Lang } from "@/lib/i18n";
 const THEME = "#fffaf9";
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -27,9 +28,8 @@ function CheckIcon({ className }: { className?: string }) {
   );
 }
 
-const REASSURANCE = ["Couples only", "Limited spots", "Dedicated support"];
-
-export default function Hero() {
+export default function Hero({ lang }: { lang: Lang }) {
+  const t = dict[lang];
   return (
     <div className="relative flex h-[100dvh] flex-col overflow-hidden bg-[#fffaf9] text-ink">
       {/* Soft warm background washes */}
@@ -79,7 +79,15 @@ export default function Hero() {
           className="h-7 w-auto invert sm:h-8"
         />
 
-        <div className="flex items-center gap-4 sm:gap-5">
+        <div className="flex items-center gap-3.5 sm:gap-5">
+          {/* Language toggle */}
+          <a
+            href={t.nav.toggleHref}
+            aria-label="Switch language"
+            className="rounded-full border border-line px-2.5 py-1 text-[0.78rem] font-semibold text-ink/70 transition hover:border-rose hover:text-rose"
+          >
+            {t.nav.toggleLabel}
+          </a>
           {/* Phone — quieter, so the headline leads */}
           <a
             href="tel:+919400971338"
@@ -96,7 +104,7 @@ export default function Hero() {
             className="hidden items-center gap-1.5 rounded-lg border border-rose/30 px-3 py-1.5 text-[0.82rem] font-semibold text-rose transition hover:border-rose hover:bg-rose hover:text-white sm:inline-flex"
           >
             <WhatsAppIcon className="h-3.5 w-3.5" />
-            WhatsApp
+            {t.nav.whatsapp}
           </a>
         </div>
       </header>
@@ -110,25 +118,18 @@ export default function Hero() {
             <svg viewBox="0 0 20 20" className="h-4 w-4 text-gold" fill="currentColor" aria-hidden>
               <path d="m10 1.5 2.47 5.26 5.78.72-4.28 3.93 1.13 5.71L10 20.2l-5.1 2.83 1.13-5.71-4.28-3.93 5.78-.72L10 1.5Z" />
             </svg>
-            15+ Years of Trusted Experience
+            {t.hero.trust}
           </span>
 
           <h1
             className="mt-4 text-[2rem] leading-[1.1] tracking-[-0.01em] text-ink sm:mt-5 sm:text-[2.9rem] sm:leading-[1.06] lg:text-[3.6rem]"
             style={{ fontFamily: "var(--font-serif)", fontWeight: 500 }}
           >
-            Finally experience Umrah{" "}
-            <em className="italic text-rose">together</em> — more meaningful,
-            more peaceful, and{" "}
-            <em className="italic text-rose">closer to Allah and each other.</em>
+            {t.hero.title}
           </h1>
 
           <p className="mt-4 max-w-md text-[0.95rem] leading-relaxed text-muted sm:mt-5 sm:text-base">
-            No crowded groups. No shared bed spaces. No rushing through a generic
-            itinerary. Zawj brings couples together for a curated Umrah with{" "}
-            <span className="font-semibold text-ink">
-              more privacy, personal space, and meaningful time together.
-            </span>
+            {t.hero.sub}
           </p>
 
           {/* CTAs — compact primary + a quiet "explore" that scrolls down */}
@@ -140,13 +141,13 @@ export default function Hero() {
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-rose px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-rose/25 transition hover:bg-rose-dark"
             >
               <WhatsAppIcon className="h-4 w-4" />
-              Talk to us on WhatsApp
+              {t.hero.ctaPrimary}
             </a>
             <a
               href="#story"
               className="inline-flex items-center justify-center gap-1.5 px-2 py-2.5 text-sm font-semibold text-ink transition hover:text-rose"
             >
-              Explore in detail
+              {t.hero.ctaSecondary}
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-hidden>
                 <path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -155,7 +156,7 @@ export default function Hero() {
 
           {/* Reassurance — single line, never wraps */}
           <ul className="mt-5 flex items-center gap-x-4 whitespace-nowrap text-[0.72rem] font-medium text-muted sm:gap-x-6 sm:text-sm">
-            {REASSURANCE.map((item) => (
+            {t.hero.reassurance.map((item) => (
               <li key={item} className="flex items-center gap-1.5">
                 <CheckIcon className="h-3.5 w-3.5 shrink-0 text-rose sm:h-4 sm:w-4" />
                 {item}
