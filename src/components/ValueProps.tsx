@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import Reveal from "./Reveal";
 
-const WHATSAPP_URL = "https://wa.me/919400971338";
+import { WHATSAPP_URL } from "@/lib/whatsapp";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (

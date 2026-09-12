@@ -3,6 +3,7 @@ import Problem from "@/components/Problem";
 import ValueProps from "@/components/ValueProps";
 import Comparison from "@/components/Comparison";
 import Steps from "@/components/Steps";
+import ShareWithPartner from "@/components/ShareWithPartner";
 import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
@@ -15,6 +16,7 @@ export default function Home() {
       <ValueProps />
       <Comparison />
       <Steps />
+      <ShareWithPartner />
       <FAQ />
       <FinalCTA />
       <Footer />

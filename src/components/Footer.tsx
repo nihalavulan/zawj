@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const WHATSAPP_URL = "https://wa.me/919400971338";
+import { WHATSAPP_URL } from "@/lib/whatsapp";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
