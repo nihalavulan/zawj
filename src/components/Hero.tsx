@@ -47,7 +47,7 @@ export default function Hero() {
           src="/couple-kaaba.jpg"
           alt="A couple standing together before the Kaaba in Makkah"
           fill
-          priority
+          loading="eager"
           sizes="100vw"
           className="object-cover object-[10%_center]"
         />
@@ -163,7 +163,8 @@ export default function Hero() {
               src="/couple-kaaba.jpg"
               alt="A couple standing together before the Kaaba in Makkah"
               fill
-              loading="eager"
+              priority
+              fetchPriority="high"
               sizes="100vw"
               className="object-cover object-[center_32%]"
             />
