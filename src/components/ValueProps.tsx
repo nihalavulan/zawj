@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
+import Reveal from "./Reveal";
 
 const WHATSAPP_URL = "https://wa.me/919400971338";
 
@@ -138,37 +139,20 @@ function ImagePlaceholder({ note }: { note: ReactNode }) {
 
 function Media({ media }: { media: Media }) {
   if (media.kind === "image") {
-    if (media.blend) {
-      // Feather the photo into the white section — no hard frame.
-      const mask =
-        "radial-gradient(115% 128% at 50% 42%, #000 55%, rgba(0,0,0,0.35) 78%, transparent 93%)";
-      return (
-        <div className="relative aspect-[4/5] w-full sm:aspect-[4/4.5]">
+    // Rounded, matted photo — a soft theme-tinted frame to match the
+    // rest of the page's rounded cards.
+    return (
+      <div className="rounded-[1.4rem] bg-mist/70 p-2 shadow-lg shadow-ink/5 ring-1 ring-line">
+        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl sm:aspect-[4/4.5]">
           <Image
             src={media.src}
             alt={media.alt}
             fill
             sizes="(min-width: 1024px) 40vw, 100vw"
             className="object-cover"
-            style={{
-              objectPosition: media.objectPosition ?? "center",
-              WebkitMaskImage: mask,
-              maskImage: mask,
-            }}
+            style={{ objectPosition: media.objectPosition ?? "center" }}
           />
         </div>
-      );
-    }
-    return (
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl shadow-lg shadow-ink/10 ring-1 ring-line">
-        <Image
-          src={media.src}
-          alt={media.alt}
-          fill
-          sizes="(min-width: 1024px) 40vw, 100vw"
-          className="object-cover"
-          style={{ objectPosition: media.objectPosition ?? "center" }}
-        />
       </div>
     );
   }
@@ -182,7 +166,7 @@ export default function ValueProps() {
         {VALUE_PROPS.map((vp, i) => {
           const imageLeft = i % 2 === 0;
           return (
-            <div
+            <Reveal
               key={vp.eyebrow}
               className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
             >
@@ -241,7 +225,7 @@ export default function ValueProps() {
                   </a>
                 </div>
               </div>
-            </div>
+            </Reveal>
           );
         })}
       </div>

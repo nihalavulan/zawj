@@ -1,3 +1,5 @@
+import Reveal from "./Reveal";
+
 const ROWS: { label: string; normal: string; zawj: string }[] = [
   { label: "Group size", normal: "40+ pilgrims", zawj: "12 couples" },
   { label: "Your room", normal: "Shared spaces", zawj: "Private room" },
@@ -10,7 +12,7 @@ const ROWS: { label: string; normal: string; zawj: string }[] = [
 export default function Comparison() {
   return (
     <section className="relative bg-[#fffaf9] py-20 sm:py-24 lg:py-28">
-      <div className="mx-auto max-w-2xl px-6">
+      <Reveal className="mx-auto max-w-2xl px-6">
         {/* Heading */}
         <div className="text-center">
           <span className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-rose sm:text-xs">
@@ -75,7 +77,7 @@ export default function Comparison() {
         <p className="mt-4 text-center text-xs text-muted sm:text-sm">
           Everything a couple actually wants from Umrah — without the crowd.
         </p>
-      </div>
+      </Reveal>
     </section>
   );
 }

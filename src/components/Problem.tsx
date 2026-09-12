@@ -1,8 +1,9 @@
 import HeroVideo from "./HeroVideo";
+import Reveal from "./Reveal";
 
 export default function Problem() {
   return (
-    <section className="relative overflow-hidden bg-[#fffaf9] py-20 sm:py-24 lg:py-28">
+    <section id="story" className="relative overflow-hidden bg-[#fffaf9] py-20 scroll-mt-8 sm:py-24 lg:py-28">
       {/* Soft warm background wash to echo the hero */}
       <div
         aria-hidden
@@ -10,7 +11,7 @@ export default function Problem() {
         style={{ background: "radial-gradient(closest-side, #f3e6d4, transparent)" }}
       />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-16 px-6 lg:grid-cols-2 lg:gap-16 lg:px-10">
+      <Reveal className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-16 px-6 lg:grid-cols-2 lg:gap-16 lg:px-10">
         {/* Copy */}
         <div className="flex flex-col">
           <span className="inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-rose sm:text-xs">
@@ -75,7 +76,7 @@ export default function Problem() {
             <HeroVideo />
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

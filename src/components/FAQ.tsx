@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Reveal from "./Reveal";
 
 const FAQS: { q: string; a: string }[] = [
   {
@@ -38,7 +39,7 @@ export default function FAQ() {
 
   return (
     <section className="relative bg-[#fffaf9] py-20 sm:py-24 lg:py-28">
-      <div className="mx-auto max-w-2xl px-6">
+      <Reveal className="mx-auto max-w-2xl px-6">
         {/* Heading */}
         <div className="text-center">
           <span className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-rose sm:text-xs">
@@ -90,7 +91,7 @@ export default function FAQ() {
             );
           })}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

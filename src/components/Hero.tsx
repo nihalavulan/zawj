@@ -76,27 +76,27 @@ export default function Hero() {
           width={130}
           height={40}
           priority
-          className="h-8 w-auto invert sm:h-9"
+          className="h-7 w-auto invert sm:h-8"
         />
 
-        <div className="flex items-center gap-5 sm:gap-7">
-          {/* Phone — shown on mobile in place of the CTA */}
+        <div className="flex items-center gap-4 sm:gap-5">
+          {/* Phone — quieter, so the headline leads */}
           <a
             href="tel:+919400971338"
-            className="flex items-center gap-2 text-base font-semibold text-ink transition hover:text-rose sm:text-[1.05rem]"
+            className="flex items-center gap-1.5 text-sm font-medium text-ink/70 transition hover:text-rose sm:text-[0.9rem]"
           >
-            <PhoneIcon className="h-4 w-4 text-rose" />
+            <PhoneIcon className="h-3.5 w-3.5 text-rose/80" />
             +91 9400 971 338
           </a>
-          {/* Header CTA — hidden on mobile */}
+          {/* Header CTA — subtle outline, hidden on mobile */}
           <a
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden items-center gap-2 rounded-lg bg-rose px-4 py-2 text-sm font-semibold text-white transition hover:bg-rose-dark sm:inline-flex"
+            className="hidden items-center gap-1.5 rounded-lg border border-rose/30 px-3 py-1.5 text-[0.82rem] font-semibold text-rose transition hover:border-rose hover:bg-rose hover:text-white sm:inline-flex"
           >
-            <WhatsAppIcon className="h-4 w-4" />
-            Talk to us on WhatsApp
+            <WhatsAppIcon className="h-3.5 w-3.5" />
+            WhatsApp
           </a>
         </div>
       </header>
@@ -131,16 +131,25 @@ export default function Hero() {
             </span>
           </p>
 
-          {/* Main CTA — smaller, subtle radius */}
-          <div className="mt-6">
+          {/* CTAs — compact primary + a quiet "explore" that scrolls down */}
+          <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2.5 rounded-lg bg-rose px-6 py-3 text-[0.95rem] font-semibold text-white shadow-md shadow-rose/25 transition hover:bg-rose-dark sm:w-auto"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-rose px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-rose/25 transition hover:bg-rose-dark"
             >
-              <WhatsAppIcon className="h-[18px] w-[18px]" />
+              <WhatsAppIcon className="h-4 w-4" />
               Talk to us on WhatsApp
+            </a>
+            <a
+              href="#story"
+              className="inline-flex items-center justify-center gap-1.5 px-2 py-2.5 text-sm font-semibold text-ink transition hover:text-rose"
+            >
+              Explore in detail
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-hidden>
+                <path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </a>
           </div>
 

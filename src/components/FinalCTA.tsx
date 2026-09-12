@@ -1,3 +1,5 @@
+import Reveal from "./Reveal";
+
 const WHATSAPP_URL = "https://wa.me/919400971338";
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -46,7 +48,7 @@ export default function FinalCTA() {
         style={{ background: "radial-gradient(closest-side, #f3e6d4, transparent)" }}
       />
 
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-6 lg:grid-cols-2 lg:gap-16 lg:px-10">
+      <Reveal className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-6 lg:grid-cols-2 lg:gap-16 lg:px-10">
         {/* Copy */}
         <div>
           <span className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-rose sm:text-xs">
@@ -129,7 +131,7 @@ export default function FinalCTA() {
             ))}
           </ul>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

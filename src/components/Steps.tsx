@@ -1,3 +1,5 @@
+import Reveal from "./Reveal";
+
 const WHATSAPP_URL = "https://wa.me/919400971338";
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -30,7 +32,7 @@ const STEPS: { title: string; desc: string }[] = [
 export default function Steps() {
   return (
     <section className="relative bg-white py-20 sm:py-24 lg:py-28">
-      <div className="mx-auto max-w-6xl px-6 lg:px-10">
+      <Reveal className="mx-auto max-w-6xl px-6 lg:px-10">
         {/* Heading */}
         <div className="mx-auto max-w-2xl text-center">
           <span className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-rose sm:text-xs">
@@ -103,7 +105,7 @@ export default function Steps() {
             Start with step one
           </a>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
