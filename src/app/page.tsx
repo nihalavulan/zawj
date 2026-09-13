@@ -7,6 +7,7 @@ import ShareWithPartner from "@/components/ShareWithPartner";
 import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <FAQ />
       <FinalCTA />
       <Footer />
+      <FloatingWhatsApp />
     </>
   );
 }
