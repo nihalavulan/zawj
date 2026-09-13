@@ -37,11 +37,10 @@ export default function Closing() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex max-w-md items-center justify-center gap-2.5 rounded-xl bg-white px-6 py-3.5 text-[0.95rem] font-semibold leading-snug text-rose shadow-lg shadow-black/10 transition hover:-translate-y-0.5 hover:bg-mist"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-[0.95rem] font-semibold text-rose shadow-lg shadow-black/10 transition hover:-translate-y-0.5 hover:bg-mist"
             >
               <WhatsAppIcon className="h-[18px] w-[18px] shrink-0" />
-              Zawj-നെ കുറിച്ച് അറിയാം, നിങ്ങളുടെ 7 ദിവസത്തെ Umrah
-              എങ്ങനെയായിരിക്കുമെന്ന് മനസ്സിലാക്കാം
+              കൂടുതൽ അറിയാം
             </a>
           </div>
         </div>

@@ -17,6 +17,14 @@ function PhoneIcon({ className }: { className?: string }) {
   );
 }
 
+function PinIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
+      <path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" />
+    </svg>
+  );
+}
+
 export default function Footer() {
   return (
     <footer className="bg-ink text-white">
@@ -58,6 +66,25 @@ export default function Footer() {
                 {PHONE_DISPLAY}
               </a>
             </div>
+          </div>
+
+          {/* Office address */}
+          <div className="max-w-xs">
+            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-rosewood">
+              ഞങ്ങളുടെ ഓഫീസ്
+            </p>
+            <a
+              href="https://maps.google.com/?q=Flyziyara+Hajj+and+Umrah+Emarald+Mall+Mavoor+Road+Kozhikode"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 flex gap-2.5 text-[0.9rem] leading-relaxed text-white/70 transition hover:text-white"
+            >
+              <PinIcon className="mt-0.5 h-4 w-4 shrink-0 text-rosewood" />
+              <span>
+                Flyziyara Hajj and Umrah, 2nd Floor, Emarald Mall, Mavoor Road,
+                Ariyadathupalam, Kozhikode, 673002
+              </span>
+            </a>
           </div>
         </div>
 

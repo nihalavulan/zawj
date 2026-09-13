@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { WHATSAPP_URL, PHONE_TEL, PHONE_DISPLAY } from "@/lib/whatsapp";
 
+const THEME = "#fffaf9";
+
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
@@ -19,16 +21,42 @@ function PhoneIcon({ className }: { className?: string }) {
 
 export default function Hero() {
   return (
-    <div className="relative overflow-hidden bg-[#fffaf9] text-ink">
+    <div className="relative flex min-h-[92svh] flex-col overflow-hidden bg-[#fffaf9] text-ink">
       {/* soft warm wash */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-40 -right-32 h-[36rem] w-[36rem] rounded-full opacity-50 blur-[130px]"
+        className="pointer-events-none absolute -bottom-40 -left-32 h-[34rem] w-[34rem] rounded-full opacity-50 blur-[120px]"
         style={{ background: "radial-gradient(closest-side, #f3e6d4, transparent)" }}
       />
 
+      {/* Desktop — full-bleed background image; a left→right theme gradient
+          keeps the copy readable and reveals the couple on the right. */}
+      <div className="absolute inset-0 z-0 hidden lg:block">
+        <Image
+          src="/couple-kaaba.jpg"
+          alt="A couple together before the Kaaba in Makkah"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[10%_center]"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to right, #fffaf9 0%, #fffaf9 40%, rgba(255,250,249,0.6) 52%, rgba(255,250,249,0.12) 62%, rgba(255,250,249,0) 70%)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="absolute inset-x-0 top-0 h-40"
+          style={{ background: `linear-gradient(to bottom, ${THEME}, transparent)` }}
+        />
+      </div>
+
       {/* Header */}
-      <header className="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-6 py-5 lg:px-10">
+      <header className="relative z-10 mx-auto flex w-full max-w-7xl shrink-0 items-center justify-between gap-4 px-6 py-5 lg:px-10">
         <Image
           src="/logo-white.png"
           alt="Zawj"
@@ -46,10 +74,9 @@ export default function Hero() {
         </a>
       </header>
 
-      {/* Hero */}
-      <section className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 px-6 pb-16 pt-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:px-10 lg:pb-24 lg:pt-10">
-        {/* Copy */}
-        <div className="flex flex-col">
+      {/* Hero body */}
+      <section className="relative z-10 mx-auto flex w-full min-h-0 max-w-7xl flex-1 flex-col px-6 pb-0 lg:justify-center lg:px-10">
+        <div className="flex shrink-0 flex-col lg:max-w-xl">
           <span className="inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-rose sm:text-xs">
             <svg viewBox="0 0 20 20" className="h-4 w-4 text-gold" fill="currentColor" aria-hidden>
               <path d="m10 1.5 2.47 5.26 5.78.72-4.28 3.93 1.13 5.71L10 20.2l-5.1 2.83 1.13-5.71-4.28-3.93 5.78-.72L10 1.5Z" />
@@ -58,7 +85,7 @@ export default function Hero() {
           </span>
 
           <h1
-            className="mt-4 text-[1.75rem] leading-[1.28] tracking-[-0.005em] text-ink sm:mt-5 sm:text-[2.15rem] sm:leading-[1.26] lg:text-[2.55rem]"
+            className="mt-4 text-[1.7rem] leading-[1.3] tracking-[-0.005em] text-ink sm:mt-5 sm:text-[2.05rem] sm:leading-[1.28] lg:text-[2.4rem]"
             style={{ fontFamily: "var(--font-serif)", fontWeight: 500 }}
           >
             ഒരുമിച്ച് പോകണം എന്ന് ഒരുപാട് നാളായി ആഗ്രഹിച്ച Umrah… ഇനി അത് 7
@@ -68,7 +95,7 @@ export default function Hero() {
             </span>
           </h1>
 
-          <p className="mt-5 max-w-xl text-[0.98rem] leading-[1.75] text-muted sm:text-base">
+          <p className="mt-4 max-w-md text-[0.95rem] leading-[1.75] text-muted sm:mt-5 sm:text-base">
             Umrah ചെയ്യണം എന്ന ആഗ്രഹമുണ്ട്, പക്ഷേ ഒരു സാധാരണ group യാത്ര പോലെ
             ആകരുതല്ലോ. അതുകൊണ്ടാണ്{" "}
             <span className="font-semibold text-ink">
@@ -77,31 +104,37 @@ export default function Hero() {
             ഒരുക്കിയത്.
           </p>
 
-          <div className="mt-7">
+          <div className="mt-6">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex max-w-md items-center justify-center gap-2.5 rounded-xl bg-rose px-6 py-3.5 text-left text-[0.95rem] font-semibold leading-snug text-white shadow-md shadow-rose/25 transition hover:bg-rose-dark"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-rose px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-rose/25 transition hover:bg-rose-dark"
             >
-              <WhatsAppIcon className="h-[18px] w-[18px] shrink-0" />
-              Zawj-നെ കുറിച്ച് അറിയാം, നിങ്ങളുടെ 7 ദിവസത്തെ Umrah
-              എങ്ങനെയായിരിക്കുമെന്ന് മനസ്സിലാക്കാം
+              <WhatsAppIcon className="h-4 w-4" />
+              കൂടുതൽ അറിയാം
             </a>
           </div>
         </div>
 
-        {/* Image */}
-        <div className="rounded-[1.6rem] bg-mist/70 p-2 shadow-lg shadow-ink/5 ring-1 ring-line">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.25rem] sm:aspect-[5/4] lg:aspect-[4/5]">
+        {/* Mobile — image fills the lower area, blended into the theme */}
+        <div className="relative -mx-6 mt-8 min-h-0 flex-1 lg:hidden">
+          <div className="relative h-full min-h-[16rem] w-full overflow-hidden">
             <Image
               src="/couple-kaaba.jpg"
               alt="A couple together before the Kaaba in Makkah"
               fill
               priority
               fetchPriority="high"
-              sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover object-[30%_center]"
+              sizes="100vw"
+              className="object-cover object-[center_30%]"
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 top-0 h-2/5"
+              style={{
+                background: `linear-gradient(to bottom, ${THEME}, rgba(255,250,249,0.65) 45%, transparent)`,
+              }}
             />
           </div>
         </div>
