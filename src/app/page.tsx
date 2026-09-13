@@ -1,5 +1,19 @@
-import Landing from "@/components/Landing";
+import Hero from "@/components/Hero";
+import Story from "@/components/Story";
+import ValueProps from "@/components/ValueProps";
+import Closing from "@/components/Closing";
+import Footer from "@/components/Footer";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 export default function Home() {
-  return <Landing lang="en" />;
+  return (
+    <>
+      <Hero />
+      <Story />
+      <ValueProps />
+      <Closing />
+      <Footer />
+      <FloatingWhatsApp />
+    </>
+  );
 }

@@ -16,15 +16,15 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "Zawj — A Couple's Umrah Experience",
+  title: "Zawj — 7 ദിവസത്തെ Couples Only Umrah",
   description:
-    "A thoughtfully curated Umrah for couples — more privacy, personal space, and meaningful time together.",
+    "നിങ്ങളിരുവർക്കും വേണ്ടി മാത്രം ഒരുക്കിയ 7 ദിവസത്തെ Couples Only Umrah അനുഭവം — വെറും 12 couples, thoughtfully curated.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="ml"
       className={`${inter.variable} ${newsreader.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">

@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { WHATSAPP_URL } from "@/lib/whatsapp";
-import { dict, type Lang } from "@/lib/i18n";
+import { WHATSAPP_URL, PHONE_TEL, PHONE_DISPLAY } from "@/lib/whatsapp";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -18,13 +17,11 @@ function PhoneIcon({ className }: { className?: string }) {
   );
 }
 
-export default function Footer({ lang }: { lang: Lang }) {
-  const t = dict[lang].footer;
+export default function Footer() {
   return (
     <footer className="bg-ink text-white">
       <div className="mx-auto max-w-7xl px-6 py-14 lg:px-10 lg:py-16">
         <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
-          {/* Brand */}
           <div className="max-w-sm">
             <Image
               src="/logo-white.png"
@@ -34,14 +31,14 @@ export default function Footer({ lang }: { lang: Lang }) {
               className="h-9 w-auto"
             />
             <p className="mt-5 text-sm leading-relaxed text-white/60">
-              {t.tagline}
+              couples-നായി ശ്രദ്ധയോടെ ഒരുക്കിയ 7 ദിവസത്തെ Umrah അനുഭവം — 15+
+              വർഷത്തെ വിശ്വസ്ത അനുഭവത്തിന്റെ പിന്തുണയോടെ.
             </p>
           </div>
 
-          {/* Contact */}
           <div>
             <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-rosewood">
-              {t.getInTouch}
+              ബന്ധപ്പെടൂ
             </p>
             <div className="mt-4 flex flex-col gap-3">
               <a
@@ -51,23 +48,22 @@ export default function Footer({ lang }: { lang: Lang }) {
                 className="inline-flex items-center gap-2.5 text-[0.95rem] font-medium text-white/85 transition hover:text-white"
               >
                 <WhatsAppIcon className="h-4 w-4 text-rosewood" />
-                {t.chat}
+                WhatsApp-ൽ ചാറ്റ് ചെയ്യൂ
               </a>
               <a
-                href="tel:+919400971338"
+                href={PHONE_TEL}
                 className="inline-flex items-center gap-2.5 text-[0.95rem] font-medium text-white/85 transition hover:text-white"
               >
                 <PhoneIcon className="h-4 w-4 text-rosewood" />
-                +91 9400 971 338
+                {PHONE_DISPLAY}
               </a>
             </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
         <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
-          <span>© {new Date().getFullYear()} Zawj. {t.rights}</span>
-          <span>{t.note}</span>
+          <span>© {new Date().getFullYear()} Zawj. എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം.</span>
+          <span>Couples Only Umrah അനുഭവം.</span>
         </div>
       </div>
     </footer>

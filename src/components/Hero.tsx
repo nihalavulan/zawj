@@ -1,8 +1,5 @@
 import Image from "next/image";
-
-import { WHATSAPP_URL } from "@/lib/whatsapp";
-import { dict, type Lang } from "@/lib/i18n";
-const THEME = "#fffaf9";
+import { WHATSAPP_URL, PHONE_TEL, PHONE_DISPLAY } from "@/lib/whatsapp";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -20,56 +17,18 @@ function PhoneIcon({ className }: { className?: string }) {
   );
 }
 
-function CheckIcon({ className }: { className?: string }) {
+export default function Hero() {
   return (
-    <svg viewBox="0 0 20 20" className={className} fill="none" aria-hidden>
-      <path d="M4 10.5 8 14.5 16 5.5" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-export default function Hero({ lang }: { lang: Lang }) {
-  const t = dict[lang];
-  return (
-    <div className="relative flex h-[100dvh] flex-col overflow-hidden bg-[#fffaf9] text-ink">
-      {/* Soft warm background washes */}
+    <div className="relative overflow-hidden bg-[#fffaf9] text-ink">
+      {/* soft warm wash */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-40 -left-32 h-[34rem] w-[34rem] rounded-full opacity-50 blur-[120px]"
+        className="pointer-events-none absolute -top-40 -right-32 h-[36rem] w-[36rem] rounded-full opacity-50 blur-[130px]"
         style={{ background: "radial-gradient(closest-side, #f3e6d4, transparent)" }}
       />
 
-      {/* Desktop only — full-bleed background image with a strong→light
-          left-to-right theme gradient; the copy sits on top and the couple
-          is revealed toward the right. */}
-      <div className="absolute inset-0 z-0 hidden lg:block">
-        <Image
-          src="/couple-kaaba.jpg"
-          alt="A couple standing together before the Kaaba in Makkah"
-          fill
-          loading="eager"
-          sizes="100vw"
-          className="object-cover object-[10%_center]"
-        />
-        {/* strong theme over the left → clears early to reveal the couple */}
-        <div
-          aria-hidden
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to right, #fffaf9 0%, #fffaf9 38%, rgba(255,250,249,0.55) 50%, rgba(255,250,249,0.1) 60%, rgba(255,250,249,0) 68%)",
-          }}
-        />
-        {/* soft top veil so the header stays readable */}
-        <div
-          aria-hidden
-          className="absolute inset-x-0 top-0 h-40"
-          style={{ background: `linear-gradient(to bottom, ${THEME}, transparent)` }}
-        />
-      </div>
-
-      {/* ── Header ───────────────────────────────────────────── */}
-      <header className="relative z-10 mx-auto flex w-full max-w-7xl shrink-0 items-center justify-between gap-4 px-6 py-5 lg:px-10">
+      {/* Header */}
+      <header className="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-6 py-5 lg:px-10">
         <Image
           src="/logo-white.png"
           alt="Zawj"
@@ -78,112 +37,71 @@ export default function Hero({ lang }: { lang: Lang }) {
           priority
           className="h-7 w-auto invert sm:h-8"
         />
-
-        <div className="flex items-center gap-3.5 sm:gap-5">
-          {/* Language toggle */}
-          <a
-            href={t.nav.toggleHref}
-            aria-label="Switch language"
-            className="rounded-full border border-line px-2.5 py-1 text-[0.78rem] font-semibold text-ink/70 transition hover:border-rose hover:text-rose"
-          >
-            {t.nav.toggleLabel}
-          </a>
-          {/* Phone — quieter, so the headline leads */}
-          <a
-            href="tel:+919400971338"
-            className="flex items-center gap-1.5 text-sm font-medium text-ink/70 transition hover:text-rose sm:text-[0.9rem]"
-          >
-            <PhoneIcon className="h-3.5 w-3.5 text-rose/80" />
-            +91 9400 971 338
-          </a>
-          {/* Header CTA — subtle outline, hidden on mobile */}
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden items-center gap-1.5 rounded-lg border border-rose/30 px-3 py-1.5 text-[0.82rem] font-semibold text-rose transition hover:border-rose hover:bg-rose hover:text-white sm:inline-flex"
-          >
-            <WhatsAppIcon className="h-3.5 w-3.5" />
-            {t.nav.whatsapp}
-          </a>
-        </div>
+        <a
+          href={PHONE_TEL}
+          className="flex items-center gap-1.5 text-sm font-medium text-ink/70 transition hover:text-rose sm:text-[0.9rem]"
+        >
+          <PhoneIcon className="h-3.5 w-3.5 text-rose/80" />
+          {PHONE_DISPLAY}
+        </a>
       </header>
 
-      {/* ── Above-the-fold hero (fits within 100dvh) ─────────── */}
-      <section className="relative z-10 mx-auto flex w-full min-h-0 max-w-7xl flex-1 flex-col gap-4 px-6 pb-0 sm:gap-5 lg:justify-center lg:px-10 lg:pb-0">
-        {/* Copy — overlaid on the image, left-aligned */}
-        <div className="flex shrink-0 flex-col lg:max-w-xl">
-          {/* Trust line — no box */}
+      {/* Hero */}
+      <section className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 px-6 pb-16 pt-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:px-10 lg:pb-24 lg:pt-10">
+        {/* Copy */}
+        <div className="flex flex-col">
           <span className="inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-rose sm:text-xs">
             <svg viewBox="0 0 20 20" className="h-4 w-4 text-gold" fill="currentColor" aria-hidden>
               <path d="m10 1.5 2.47 5.26 5.78.72-4.28 3.93 1.13 5.71L10 20.2l-5.1 2.83 1.13-5.71-4.28-3.93 5.78-.72L10 1.5Z" />
             </svg>
-            {t.hero.trust}
+            15+ വർഷത്തെ വിശ്വസ്ത അനുഭവം
           </span>
 
           <h1
-            className="mt-4 text-[2rem] leading-[1.1] tracking-[-0.01em] text-ink sm:mt-5 sm:text-[2.9rem] sm:leading-[1.06] lg:text-[3.6rem]"
+            className="mt-4 text-[1.75rem] leading-[1.28] tracking-[-0.005em] text-ink sm:mt-5 sm:text-[2.15rem] sm:leading-[1.26] lg:text-[2.55rem]"
             style={{ fontFamily: "var(--font-serif)", fontWeight: 500 }}
           >
-            {t.hero.title}
+            ഒരുമിച്ച് പോകണം എന്ന് ഒരുപാട് നാളായി ആഗ്രഹിച്ച Umrah… ഇനി അത് 7
+            ദിവസത്തെ ഒരു യാത്രയല്ല,{" "}
+            <span className="text-rose">
+              നിങ്ങളിരുവർക്കും മാത്രം ഉള്ള ഒരു അനുഭവമാകട്ടെ.
+            </span>
           </h1>
 
-          <p className="mt-4 max-w-md text-[0.95rem] leading-relaxed text-muted sm:mt-5 sm:text-base">
-            {t.hero.sub}
+          <p className="mt-5 max-w-xl text-[0.98rem] leading-[1.75] text-muted sm:text-base">
+            Umrah ചെയ്യണം എന്ന ആഗ്രഹമുണ്ട്, പക്ഷേ ഒരു സാധാരണ group യാത്ര പോലെ
+            ആകരുതല്ലോ. അതുകൊണ്ടാണ്{" "}
+            <span className="font-semibold text-ink">
+              നിങ്ങളിരുവർക്കും മാത്രം വേണ്ടി 7 ദിവസത്തെ Zawj Umrah അനുഭവം
+            </span>{" "}
+            ഒരുക്കിയത്.
           </p>
 
-          {/* CTAs — compact primary + a quiet "explore" that scrolls down */}
-          <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+          <div className="mt-7">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-rose px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-rose/25 transition hover:bg-rose-dark"
+              className="inline-flex max-w-md items-center justify-center gap-2.5 rounded-xl bg-rose px-6 py-3.5 text-left text-[0.95rem] font-semibold leading-snug text-white shadow-md shadow-rose/25 transition hover:bg-rose-dark"
             >
-              <WhatsAppIcon className="h-4 w-4" />
-              {t.hero.ctaPrimary}
-            </a>
-            <a
-              href="#story"
-              className="inline-flex items-center justify-center gap-1.5 px-2 py-2.5 text-sm font-semibold text-ink transition hover:text-rose"
-            >
-              {t.hero.ctaSecondary}
-              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-hidden>
-                <path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <WhatsAppIcon className="h-[18px] w-[18px] shrink-0" />
+              Zawj-നെ കുറിച്ച് അറിയാം, നിങ്ങളുടെ 7 ദിവസത്തെ Umrah
+              എങ്ങനെയായിരിക്കുമെന്ന് മനസ്സിലാക്കാം
             </a>
           </div>
-
-          {/* Reassurance — single line, never wraps */}
-          <ul className="mt-5 flex items-center gap-x-4 whitespace-nowrap text-[0.72rem] font-medium text-muted sm:gap-x-6 sm:text-sm">
-            {t.hero.reassurance.map((item) => (
-              <li key={item} className="flex items-center gap-1.5">
-                <CheckIcon className="h-3.5 w-3.5 shrink-0 text-rose sm:h-4 sm:w-4" />
-                {item}
-              </li>
-            ))}
-          </ul>
         </div>
 
-        {/* Mobile only — emotional image fills the remaining height, blended
-            into the theme with a soft top fade. */}
-        <div className="relative -mx-6 min-h-0 flex-1 lg:hidden">
-          <div className="relative h-full w-full overflow-hidden">
+        {/* Image */}
+        <div className="rounded-[1.6rem] bg-mist/70 p-2 shadow-lg shadow-ink/5 ring-1 ring-line">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.25rem] sm:aspect-[5/4] lg:aspect-[4/5]">
             <Image
               src="/couple-kaaba.jpg"
-              alt="A couple standing together before the Kaaba in Makkah"
+              alt="A couple together before the Kaaba in Makkah"
               fill
               priority
               fetchPriority="high"
-              sizes="100vw"
-              className="object-cover object-[center_32%]"
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-x-0 top-0 h-2/5"
-              style={{
-                background: `linear-gradient(to bottom, ${THEME}, rgba(255,250,249,0.65) 45%, transparent)`,
-              }}
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              className="object-cover object-[30%_center]"
             />
           </div>
         </div>
