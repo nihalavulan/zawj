@@ -129,7 +129,7 @@ export default function ExitPopup() {
           പോകുന്നതിന് മുമ്പ്…
         </h3>
         <p className="mx-auto mt-2.5 max-w-xs text-[0.95rem] leading-relaxed text-muted">
-          ഈ Umrah നിങ്ങളുടെ പങ്കാളിയുമായി ഒരുമിച്ച് തീരുമാനിക്കണ്ടേ? ഇത് അവർക്ക്
+          ഈ Umrah നിങ്ങളുടെ partner-നൊപ്പം ഒരുമിച്ച് തീരുമാനിക്കണ്ടേ? ഇത് അവർക്ക്
           അയക്കൂ —{" "}
           <span className="font-semibold text-ink">
             പിന്നീട് റഫറൻസിനായി സൂക്ഷിക്കാം.
@@ -146,7 +146,7 @@ export default function ExitPopup() {
             className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-rose px-5 py-3 text-[0.95rem] font-semibold text-white shadow-md shadow-rose/25 transition hover:bg-rose-dark"
           >
             <HeartIcon className="h-[17px] w-[17px]" />
-            പങ്കാളിക്ക് അയക്കൂ
+            partner-ന് അയക്കൂ
           </button>
           <a
             href={WHATSAPP_URL}

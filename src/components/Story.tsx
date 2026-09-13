@@ -54,7 +54,7 @@ export default function Story() {
         <Reveal className="mx-auto mt-12 max-w-2xl sm:mt-14">
           <div className="space-y-5 text-[1rem] leading-[1.85] text-muted">
             <p className="font-semibold text-ink">
-              Dear Umrah ഒരുമിച്ച് പോകാൻ ആഗ്രഹിക്കുന്ന couples,
+              Dear couples,
             </p>
 
             <ul className="space-y-3.5">

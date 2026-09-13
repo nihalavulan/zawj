@@ -36,7 +36,7 @@ export default function ShareWithPartner() {
             <em className="text-blush">ഒരുമിച്ച് തീരുമാനിക്കുന്നതാണ് നല്ലത്.</em>
           </h2>
           <p className="relative mx-auto mt-4 max-w-md text-[0.95rem] leading-relaxed text-white/85 sm:text-base">
-            ഇത് നിങ്ങളുടെ പങ്കാളിക്ക് അയക്കൂ, ഒരുമിച്ച് തീരുമാനിക്കൂ — നിങ്ങളുടെ
+            ഇത് നിങ്ങളുടെ partner-ന് അയക്കൂ, ഒരുമിച്ച് തീരുമാനിക്കൂ — നിങ്ങളുടെ
             Umrah ഒരൊറ്റ ടാപ്പിൽ തുടങ്ങുന്നു.
           </p>
 
@@ -46,7 +46,7 @@ export default function ShareWithPartner() {
             className="relative mt-7 inline-flex items-center gap-2.5 rounded-lg bg-white px-6 py-3 text-[0.95rem] font-semibold text-rose shadow-lg shadow-black/10 transition hover:-translate-y-0.5 hover:bg-mist"
           >
             <HeartIcon className="h-[18px] w-[18px]" />
-            പങ്കാളിക്ക് ഷെയർ ചെയ്യൂ
+            partner-ന് ഷെയർ ചെയ്യൂ
           </button>
         </div>
       </Reveal>

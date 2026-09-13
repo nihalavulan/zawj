@@ -39,14 +39,14 @@ export default function Footer() {
               className="h-9 w-auto"
             />
             <p className="mt-5 text-sm leading-relaxed text-white/60">
-              couples-നായി ശ്രദ്ധയോടെ ഒരുക്കിയ 7 ദിവസത്തെ Umrah അനുഭവം — 15+
+              couples-നായി ശ്രദ്ധയോടെ ഒരുക്കിയ 7 ദിവസത്തെ Umrah അനുഭവം. 15+
               വർഷത്തെ വിശ്വസ്ത അനുഭവത്തിന്റെ പിന്തുണയോടെ.
             </p>
           </div>
 
           <div>
             <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-rosewood">
-              ബന്ധപ്പെടൂ
+              Contact
             </p>
             <div className="mt-4 flex flex-col gap-3">
               <a
@@ -71,7 +71,7 @@ export default function Footer() {
           {/* Office address */}
           <div className="max-w-xs">
             <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-rosewood">
-              ഞങ്ങളുടെ ഓഫീസ്
+              Our Office
             </p>
             <a
               href="https://maps.google.com/?q=Flyziyara+Hajj+and+Umrah+Emarald+Mall+Mavoor+Road+Kozhikode"
@@ -89,7 +89,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
-          <span>© {new Date().getFullYear()} Zawj. എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം.</span>
+          <span>© {new Date().getFullYear()} Zawj. All rights reserved.</span>
           <span>Couples Only Umrah അനുഭവം.</span>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Reveal from "./Reveal";
 import { WHATSAPP_URL } from "@/lib/whatsapp";
 
@@ -11,37 +12,52 @@ function WhatsAppIcon({ className }: { className?: string }) {
 
 export default function Closing() {
   return (
-    <section className="bg-white py-16 sm:py-20 lg:py-24">
-      <Reveal className="mx-auto max-w-4xl px-6">
-        <div className="relative overflow-hidden rounded-[1.75rem] bg-rose px-6 py-12 text-center text-white sm:px-12 sm:py-16">
+    <section className="bg-[#fffaf9] py-16 sm:py-20 lg:py-24">
+      <Reveal className="mx-auto max-w-5xl px-6">
+        <div className="relative flex min-h-[26rem] items-end overflow-hidden rounded-[1.75rem] shadow-xl shadow-ink/15 sm:min-h-[28rem]">
+          {/* Background image */}
+          <Image
+            src="/couple-touching-kaaba.jpg"
+            alt="A couple reaching out to touch the Kaaba together in Makkah"
+            fill
+            sizes="(min-width: 1024px) 60vw, 100vw"
+            className="object-cover object-[center_35%]"
+          />
+          {/* Warm dark overlay for legibility */}
           <div
             aria-hidden
-            className="pointer-events-none absolute -right-20 -top-20 h-60 w-60 rounded-full bg-white/10 blur-2xl"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -bottom-24 -left-16 h-56 w-56 rounded-full bg-rosewood/30 blur-2xl"
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to top, rgba(42,21,32,0.94) 0%, rgba(42,21,32,0.7) 42%, rgba(42,21,32,0.35) 72%, rgba(42,21,32,0.2) 100%)",
+            }}
           />
 
-          <p className="relative mx-auto max-w-2xl text-[1.05rem] leading-[1.8] text-white/90 sm:text-[1.15rem]">
-            ഒരു സാധാരണ group Umrah പോലെ ആകരുത്.{" "}
-            <span className="font-semibold text-white">
-              Couples Only ആയി, വെറും 12 couples-നായി
-            </span>{" "}
-            7 ദിവസത്തെ യാത്ര ഓരോ ദിവസവും thoughtfully curate ചെയ്യുന്നു, അതുകൊണ്ട്
-            നിങ്ങൾക്ക് Umrah-ലും പരസ്പരത്തിലും കൂടുതൽ ശ്രദ്ധ കൊടുക്കാം.
-          </p>
+          {/* Content */}
+          <div className="relative z-10 w-full p-7 text-white sm:p-12 lg:p-14">
+            <span className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-blush">
+              നിങ്ങളുടെ Umrah, ഒരുമിച്ച്
+            </span>
+            <p className="mt-3 max-w-2xl text-[1.15rem] leading-[1.7] sm:text-[1.35rem] sm:leading-[1.6]">
+              ഒരു സാധാരണ group Umrah പോലെ ആകരുത്.{" "}
+              <span className="font-semibold">
+                Couples Only ആയി, വെറും 12 couples-നായി
+              </span>{" "}
+              7 ദിവസത്തെ യാത്ര ഓരോ ദിവസവും thoughtfully curate ചെയ്യുന്നു, അതുകൊണ്ട്
+              നിങ്ങൾക്ക് Umrah-ലും പരസ്പരത്തിലും കൂടുതൽ ശ്രദ്ധ കൊടുക്കാം.
+            </p>
 
-          <div className="relative mt-9 flex justify-center">
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-[0.95rem] font-semibold text-rose shadow-lg shadow-black/10 transition hover:-translate-y-0.5 hover:bg-mist"
-            >
-              <WhatsAppIcon className="h-[18px] w-[18px] shrink-0" />
-              കൂടുതൽ അറിയാം
-            </a>
+            <div className="mt-7">
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-[0.95rem] font-semibold text-rose shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-mist"
+              >
+                <WhatsAppIcon className="h-[18px] w-[18px]" />
+                കൂടുതൽ അറിയാം
+              </a>
+            </div>
           </div>
         </div>
       </Reveal>
